@@ -12,10 +12,12 @@ from tkinter import filedialog
 from functions.Nubo.nuboGuiaValvula import case_nubo_guia_valvula
 from functions.Nubo.nuboAsientoValvula import case_nubo_asiento_valvula
 from functions.Mahle.mahleConjuntos import case_mahle_conjuntos
+from functions.Mahle.mahleSubconjuntos import case_mahle_subconjuntos
+
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS
+from constants.empresas import MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -24,7 +26,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = [NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS]
+        self.opciones = [MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -71,6 +73,8 @@ class SelectorApp:
             case_nubo_asiento_valvula(archivo_excel, messagebox)
         elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS:
             case_mahle_conjuntos(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_SUBCONJUNTOS_PC:
+            case_mahle_subconjuntos(archivo_excel, messagebox)    
    
         self.root.destroy()
 
