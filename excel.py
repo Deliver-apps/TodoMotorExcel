@@ -7,10 +7,15 @@ import tkinter as tk
 import tkinter.messagebox as messagebox
 from tkinter import ttk
 from tkinter import filedialog
-from functions.mahleGuiaValvula import case_nubo_guia_valvula
+
+#functions
+from functions.Nubo.nuboGuiaValvula import case_nubo_guia_valvula
+from functions.Nubo.nuboAsientoValvula import case_nubo_asiento_valvula
+from functions.Mahle.mahleConjuntos import case_mahle_conjuntos
+
+#utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS, MAHLE_COJINETES_PC
-from utils.mahleRef import ref_mahle_conjuntos
+from constants.empresas import NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -19,7 +24,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = [NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS, MAHLE_COJINETES_PC]
+        self.opciones = [NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -63,16 +68,14 @@ class SelectorApp:
         if self.opcion_seleccionada.get() == NUBO_GUIA_VALVULA:
             case_nubo_guia_valvula(archivo_excel, messagebox)
         elif self.opcion_seleccionada.get() == NUBO_ASIENTO_VALVULA:
-            self.case_nubo_asiento_valvula(archivo_excel)
+            case_nubo_asiento_valvula(archivo_excel, messagebox)
         elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS:
-            self.case_mahle_conjuntos(archivo_excel)    
-        elif self.opcion_seleccionada.get() == MAHLE_COJINETES_PC:
-            self.case_mahle_cojinetes(archivo_excel)    
-
+            case_mahle_conjuntos(archivo_excel, messagebox)    
+   
         self.root.destroy()
 
         if not archivo_excel:
-            messagebox.showwarning("Warning", "Debes seleccionar un archivo Excel")
+            messagebox.warning("Warning", "Debes seleccionar un archivo Excel")
             return
 
         # Check if the selected file is an Excel file. !!!AVERIGUAR OTROS FORMATOS DE EXCEL!!!
@@ -93,71 +96,6 @@ class SelectorApp:
         columnas = get_required_columns(opcion)
         messagebox.showinfo("Info", f"El archivo Excel debe contener las columnas: {columnas}")
 
-        
-    def case_nubo_asiento_valvula(self, archivo_excel):   
-        columnas = self.get_required_columns(NUBO_ASIENTO_VALVULA)
-        df = leer_archivo_excel(archivo_excel, columnas, messagebox)
-
-        # Los valores de 'medida' que quieres añadir al 'Código'
-        medidas = ['STD' , '005', '010', '020']
-
-        # Lista para almacenar los datos
-        datos = []
-
-        for _, row in df.iterrows():
-            for medida in medidas:
-                # Añadir un diccionario por cada combinación de código y medida
-                datos.append({'Código': f"{row['Código']} {medida}", 'Marca': row['Marca'], 'Precio': round(row['Precio'], 2)})
-
-        # Crear un nuevo DataFrame a partir de la lista de diccionarios
-        df_repetido = pd.DataFrame(datos)
-
-        guardar_df_en_excel(df_repetido, 'nubo_asiento_valvula')
-
-        print(df_repetido)
-        print('Se ha guardado el archivo en el escritorio')
-
-    def case_mahle_conjuntos(self, archivo_excel):
-        columnas = self.get_required_columns(MAHLE_CONJUNTOS)
-        df = leer_archivo_excel(archivo_excel, columnas, messagebox)      
-        datos = []
-        
-        for _, row in df.iterrows():
-            if pd.isna(row["Precio"]) and row["Artículo"] is not None:
-                datos.append({'Artículo - Ref': '', "Aplicación": row["Artículo"], 'Precio': '' })
-            else:
-                medidas = ref_mahle_conjuntos(row["Ref."])
-                
-                for medida in medidas:
-                    # Añadir un diccionario por cada combinación de código y medida
-                    datos.append({'Artículo - Ref': f"{row['Artículo']} / {row['Ref.']} / {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
-        
-        df_repetido = pd.DataFrame(datos)
-
-        guardar_df_en_excel(df_repetido, 'mahle_conjuntos')
-        
-        print(df_repetido)
-        print('Se ha guardado el archivo en el escritorio')
-        
-    def case_mahle_cojinetes(self, archivo_excel): 
-        columnas = self.get_required_columns(MAHLE_COJINETES_PC)
-        df = leer_archivo_excel(archivo_excel, columnas, messagebox)
-
-        medidas = ['STD', '0,25', '0,50', '0,75', 'SPA', '(F-STD)']
-        datos= []
-
-        for _, row in df.iterrows():
-            for medida in medidas:
-                datos.append({'Código Corto': f"{row['Código Corto']} {medida}", 'Marca': row['Marca'], 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})
-
-        df_repetido = pd.DataFrame(datos)
-        
-        guardar_df_en_excel(df_repetido, 'mahle_cojinetes')
-
-        print(df_repetido)
-        print('Se ha guardado el archivo en el escritorio')
-
-    
 # Crear la ventana principal
 root = tk.Tk()
 root.geometry('400x300')

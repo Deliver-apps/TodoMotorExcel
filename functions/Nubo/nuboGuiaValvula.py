@@ -3,7 +3,7 @@ from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
 from constants.empresas import NUBO_GUIA_VALVULA
 from utils.requiredColumns import get_required_columns
 
-def case_nubo_guia_valvula(self, archivo_excel, messagebox):
+def case_nubo_guia_valvula(archivo_excel, messagebox):
     columnas = get_required_columns(NUBO_GUIA_VALVULA)
     df = leer_archivo_excel(archivo_excel, columnas, messagebox)
     

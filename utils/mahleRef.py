@@ -1,4 +1,4 @@
-def ref_mahle_conjuntos(self, ref):
+def ref_mahle_conjuntos(ref):
         switch = {
             'E.O.': ['N° de equipo original.'],
             'AC': ['Altura de Compresión reducida'],
