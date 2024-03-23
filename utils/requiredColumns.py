@@ -1,4 +1,4 @@
-from constants.empresas import MAHLE_SUBCONJUNTOS_PC, MAHLE_CONJUNTOS, NUBO_ASIENTO_VALVULA, NUBO_GUIA_VALVULA
+from constants.empresas import MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_CONJUNTOS, NUBO_ASIENTO_VALVULA, NUBO_GUIA_VALVULA
 
 
 def get_required_columns(opcion):
@@ -8,6 +8,7 @@ def get_required_columns(opcion):
         NUBO_ASIENTO_VALVULA: ['Código', 'Marca', 'Precio'],
         MAHLE_CONJUNTOS: ['Artículo', 'Ref.', 'Precio', "Aplicación"],
         MAHLE_SUBCONJUNTOS_PC: ['CODIGO', 'APLICACION', 'MEDIDAS', 'Precio'],
+        MAHLE_AROS_PC: ['APLICACION', 'MEDIDAS', 'RECTIF.', 'RECAMBIO', 'Precio RECTIF.', 'Precio RECAMBIO']
         # añadir...
     }
     return opciones.get(opcion, [])
