@@ -1,11 +1,11 @@
 import pandas as pd
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import MAHLE_CONJUNTOS
+from constants.empresas import MAHLE_CONJUNTOS_MH
 from utils.requiredColumns import get_required_columns
 from utils.mahleRef import ref_mahle_conjuntos
 
-def case_mahle_conjuntos(archivo_excel, messagebox):
-        columnas = get_required_columns(MAHLE_CONJUNTOS)
+def case_mahle_conjuntos_mh(archivo_excel, messagebox):
+        columnas = get_required_columns(MAHLE_CONJUNTOS_MH)
         df = leer_archivo_excel(archivo_excel, columnas, messagebox)      
         datos = []
         
@@ -21,7 +21,7 @@ def case_mahle_conjuntos(archivo_excel, messagebox):
         
         df_repetido = pd.DataFrame(datos)
 
-        guardar_df_en_excel(df_repetido, 'mahle_conjuntos')
+        guardar_df_en_excel(df_repetido, 'mahle_conjuntos_mh')
         
         print(df_repetido)
         print('Se ha guardado el archivo en el escritorio')

@@ -1,3 +1,4 @@
+#referencia para mahle: conjuntos, subconjuntos, camisa, cojinetes
 def ref_mahle_conjuntos(ref):
         switch = {
             'E.O.': ['N° de equipo original.'],

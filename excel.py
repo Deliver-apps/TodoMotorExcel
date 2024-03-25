@@ -9,16 +9,23 @@ from tkinter import ttk
 from tkinter import filedialog
 
 #functions
+#nubo
 from functions.Nubo.nuboGuiaValvula import case_nubo_guia_valvula
 from functions.Nubo.nuboAsientoValvula import case_nubo_asiento_valvula
-from functions.Mahle.mahleConjuntos import case_mahle_conjuntos
-from functions.Mahle.mahleSubconjuntos import case_mahle_subconjuntos
-from functions.Mahle.mahleAros import case_mahle_aros
-
+#mahle PC
+from functions.MahlePC.mahleSubconjuntosPC import case_mahle_subconjuntos_pc
+from functions.MahlePC.mahleArosPC import case_mahle_aros_pc
+#mahle MH
+from functions.MahleMH.mahleConjuntosMH import case_mahle_conjuntos_mh
+from functions.MahleMH.mahleSubconjuntosMH import case_mahle_subconjuntos_mh
+from functions.MahleMH.mahleCojinetesMH import case_mahle_cojinetes_mh
+from functions.MahleMH.mahleCamisaMH import case_mahle_camisa_mh
+from functions.MahleMH.mahleArosMH import case_mahle_aros_mh
+from functions.MahleMH.mahleArosRectifMH import case_mahle_aros_rectif_mh
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS
+from constants.empresas import MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -27,7 +34,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = [MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, MAHLE_CONJUNTOS]
+        self.opciones = [MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -67,17 +74,31 @@ class SelectorApp:
 
     def aceptar(self):
         archivo_excel = self.archivo_seleccionado.get()
-        
+        #NUBO
         if self.opcion_seleccionada.get() == NUBO_GUIA_VALVULA:
             case_nubo_guia_valvula(archivo_excel, messagebox)
         elif self.opcion_seleccionada.get() == NUBO_ASIENTO_VALVULA:
             case_nubo_asiento_valvula(archivo_excel, messagebox)
-        elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS:
-            case_mahle_conjuntos(archivo_excel, messagebox)    
+        
+        #MAHLE PC
         elif self.opcion_seleccionada.get() == MAHLE_SUBCONJUNTOS_PC:
-            case_mahle_subconjuntos(archivo_excel, messagebox)    
+            case_mahle_subconjuntos_pc(archivo_excel, messagebox)    
         elif self.opcion_seleccionada.get() == MAHLE_AROS_PC:
-            case_mahle_aros(archivo_excel, messagebox)    
+            case_mahle_aros_pc(archivo_excel, messagebox)
+        
+        #MAHLE MH
+        elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS_MH:
+            case_mahle_conjuntos_mh(archivo_excel, messagebox)      
+        elif self.opcion_seleccionada.get() == MAHLE_SUBCONJUNTOS_MH:
+            case_mahle_subconjuntos_mh(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_COJINETES_MH:
+            case_mahle_cojinetes_mh(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_CAMISA_MH:
+            case_mahle_camisa_mh(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_AROS_MH:
+            case_mahle_aros_mh(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_AROS_RECTIF_MH:
+            case_mahle_aros_rectif_mh(archivo_excel, messagebox)    
    
         self.root.destroy()
 

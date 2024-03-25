@@ -1,18 +1,17 @@
-#Ok, no accede a las columnas RECTIF. RECAMBIO y Precio porque no estan arriba del todo, estan en el row(2), sigo con este despues.
+#no accede a las columnas RECTIF. RECAMBIO y Precio porque no estan arriba del todo, estan en el row(2), sigo con este despues. Hay 2 columnas con Precio y diferentes var
 import pandas as pd
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
 from constants.empresas import MAHLE_AROS_PC
 from utils.requiredColumns import get_required_columns
 
-def case_mahle_aros(archivo_excel, messagebox):
+def case_mahle_aros_pc(archivo_excel, messagebox):
     columnas = get_required_columns(MAHLE_AROS_PC)
     df = leer_archivo_excel(archivo_excel, columnas, messagebox)
 
     duplicated_columns = df.columns[df.columns.duplicated()]
-    #Se crea una nueva columna que mezcla los 2 precios
+    #Se crea una nueva columna que mezcla los 2 precios. < No serviria para que lo pasen a su software supongo. Intento despues con get.col
     df['Precio'] = df[duplicated_columns].apply(lambda row: ', '.join(row), axis=1)
 
-    
     # Lista para almacenar los datos
     datos = []
 
