@@ -8,7 +8,7 @@ def get_required_columns(opcion):
         NUBO_ASIENTO_VALVULA: ['Código', 'Marca', 'Precio'],
         MAHLE_CONJUNTOS: ['Artículo', 'Ref.', 'Precio', "Aplicación"],
         MAHLE_SUBCONJUNTOS_PC: ['CODIGO', 'APLICACION', 'MEDIDAS', 'Precio'],
-        MAHLE_AROS_PC: ['APLICACION', 'MEDIDAS', 'RECTIF.', 'RECAMBIO', 'Precio RECTIF.', 'Precio RECAMBIO']
+        MAHLE_AROS_PC: ['APLICACION', 'MEDIDAS', 'RECTIF.', 'RECAMBIO', 'Precio']
         # añadir...
     }
     return opciones.get(opcion, [])
