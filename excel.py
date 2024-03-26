@@ -22,10 +22,18 @@ from functions.MahleMH.mahleCojinetesMH import case_mahle_cojinetes_mh
 from functions.MahleMH.mahleCamisaMH import case_mahle_camisa_mh
 from functions.MahleMH.mahleArosMH import case_mahle_aros_mh
 from functions.MahleMH.mahleArosRectifMH import case_mahle_aros_rectif_mh
+from functions.MahleMH.mahleArosTH import case_mahle_aros_th
+from functions.MahleMH.mahleOrings import case_mahle_oring
+#mahle CL
+from functions.MahleCL.mahleConjuntosCL import case_mahle_conjuntos_cl
+from functions.MahleCL.mahleSubconjuntosCL import case_mahle_subconjuntos_cl
+from functions.MahleCL.mahleCamisaCL import case_mahle_camisa_cl
+from functions.MahleCL.mahleArosCL import case_mahle_aros_cl
+from functions.MahleCL.mahleCojinetesCL import case_mahle_cojinetes_cl
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
+from constants.empresas import MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -34,7 +42,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = [MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA]
+        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -99,6 +107,22 @@ class SelectorApp:
             case_mahle_aros_mh(archivo_excel, messagebox)    
         elif self.opcion_seleccionada.get() == MAHLE_AROS_RECTIF_MH:
             case_mahle_aros_rectif_mh(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_AROS_TH:
+            case_mahle_aros_th(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_ORING:
+            case_mahle_oring(archivo_excel, messagebox)    
+        
+        #MAHLE CL
+        elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS_CL:
+            case_mahle_conjuntos_cl(archivo_excel, messagebox) 
+        elif self.opcion_seleccionada.get() == MAHLE_SUBCONJUNTOS_CL:
+            case_mahle_subconjuntos_cl(archivo_excel, messagebox) 
+        elif self.opcion_seleccionada.get() == MAHLE_CAMISA_CL:
+            case_mahle_camisa_cl(archivo_excel, messagebox) 
+        elif self.opcion_seleccionada.get() == MAHLE_COJINETES_CL:
+            case_mahle_cojinetes_cl(archivo_excel, messagebox) 
+        elif self.opcion_seleccionada.get() == MAHLE_AROS_CL:
+            case_mahle_aros_cl(archivo_excel, messagebox) 
    
         self.root.destroy()
 
@@ -121,6 +145,11 @@ class SelectorApp:
     
     def show_required_columns(self, event):
         opcion = self.opcion_seleccionada.get()
+
+        if opcion.startswith('-----'):
+            messagebox.showwarning("Seleccion Invalida", 'Selecciona una opcion que sea valida')
+            return
+
         columnas = get_required_columns(opcion)
         messagebox.showinfo("Info", f"El archivo Excel debe contener las columnas: {columnas}")
 

@@ -21,7 +21,7 @@ def case_mahle_camisa_mh(archivo_excel, messagebox):
     # Crear un nuevo DataFrame a partir de la lista de diccionarios
     df_repetido = pd.DataFrame(datos)
 
-    guardar_df_en_excel(df_repetido, 'mahle_camisa_pc')
+    guardar_df_en_excel(df_repetido, 'mahle_camisa_mh')
 
     print(df_repetido)
     print('Se ha guardado el archivo en el escritorio')
