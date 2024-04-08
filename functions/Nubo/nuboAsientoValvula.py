@@ -16,7 +16,7 @@ def case_nubo_asiento_valvula(archivo_excel, messagebox):
         for _, row in df.iterrows():
             for medida in medidas:
                 # Añadir un diccionario por cada combinación de código y medida
-                datos.append({'Código': f"{row['Código']} {medida}", 'Marca': row['Marca'], 'Precio': round(row['Precio'], 2)})
+                datos.append({'Código': f"{row['Código']} {medida}", 'Marca': row['Marca'], 'Modelo (Aplicación)': row['Modelo (Aplicación)'], 'Precio': round(row['Precio'], 2)})
 
         # Crear un nuevo DataFrame a partir de la lista de diccionarios
         df_repetido = pd.DataFrame(datos)

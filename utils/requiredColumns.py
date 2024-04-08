@@ -4,8 +4,8 @@ def get_required_columns(opcion):
     # INSERTAR COLUMNAS POR CADA DEF
     opciones = {
         #NUBO
-        NUBO_GUIA_VALVULA: ['Código', 'Marca', 'Precio'],
-        NUBO_ASIENTO_VALVULA: ['Código', 'Marca', 'Precio'],
+        NUBO_GUIA_VALVULA: ['Código', 'Marca', 'Precio', 'Modelo (Aplicación)'],
+        NUBO_ASIENTO_VALVULA: ['Código', 'Marca', 'Precio', 'Modelo (Aplicación)'],
         
         #MAHLE PC
         MAHLE_SUBCONJUNTOS_PC: ['CODIGO', 'APLICACION', 'MEDIDAS', 'Precio'],
