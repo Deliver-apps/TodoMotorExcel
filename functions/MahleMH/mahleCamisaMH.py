@@ -11,12 +11,20 @@ def case_mahle_camisa_mh(archivo_excel, messagebox):
     datos = []
 
     for _, row in df.iterrows():
-        medidas = str(row['Medidas']).split('/')
+        if pd.isna(row["Precio"]) and row["MAHLE"] is not None:
+            datos.append({'MAHLE': '', "Aplicación": row["MAHLE"],'Medidas': '', 'Precio': '' })
+        else:
+            medidas = str(row['Medidas']).split('/')
+            ##Float para redondear (test)
+            try:
+                precio = round(float(row['Precio']), 2)
+            except ValueError:
+                precio = ''
         
-        for medida in medidas:
-            medida = medida.strip()
-            
-            datos.append({'MAHLE': f"{row['MAHLE']}",'Medidas': medida, 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})
+            for medida in medidas:
+                medida = medida.strip()
+                
+                datos.append({'MAHLE': f"{row['MAHLE']}",'Medidas': medida, 'Aplicación': row['Aplicación'], 'Precio': precio})
 
     # Crear un nuevo DataFrame a partir de la lista de diccionarios
     df_repetido = pd.DataFrame(datos)

@@ -1,5 +1,3 @@
-#Este no se si es necesario!.
-
 import pandas as pd
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
 from constants.empresas import MAHLE_ORING
@@ -14,14 +12,14 @@ def case_mahle_oring(archivo_excel, messagebox):
 
     for _, row in df.iterrows():
         if pd.isna(row["Precio"]) and row["Código MAHLE"] is not None:
-            datos.append({'CODIGO': '', "Aplicación (motor)": row["Código MAHLE"], 'Precio': '' })
+            datos.append({'Código MAHLE': '', "Aplicación (motor)": row["Código MAHLE"],'Conjunto equivalente': '', 'Precio': '' })
         else:
             medidas = str(row['Conjunto equivalente']).split('/')
         
             for medida in medidas:
                 medida = medida.strip()
             
-                datos.append({'Código MAHLE': f"{row['Código MAHLE']}", 'Aplicación (motor)': row['Aplicación (motor)'],'Aplicación (motor)': medida, 'Precio': round(row['Precio'], 2)})
+                datos.append({'Código MAHLE': f"{row['Código MAHLE']}",'Aplicación (motor)': row['Aplicación (motor)'],'Conjunto equivalente': medida, 'Precio': round(row['Precio'], 2)})
 
     # Crear un nuevo DataFrame a partir de la lista de diccionarios
     df_repetido = pd.DataFrame(datos)

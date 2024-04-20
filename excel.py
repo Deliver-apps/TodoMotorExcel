@@ -15,6 +15,7 @@ from functions.Nubo.nuboAsientoValvula import case_nubo_asiento_valvula
 #mahle PC
 from functions.MahlePC.mahleSubconjuntosPC import case_mahle_subconjuntos_pc
 from functions.MahlePC.mahleArosPC import case_mahle_aros_pc
+from functions.MahlePC.mahleCojinetesPC import case_mahle_cojinetes_pc
 #mahle MH
 from functions.MahleMH.mahleConjuntosMH import case_mahle_conjuntos_mh
 from functions.MahleMH.mahleSubconjuntosMH import case_mahle_subconjuntos_mh
@@ -24,6 +25,8 @@ from functions.MahleMH.mahleArosMH import case_mahle_aros_mh
 from functions.MahleMH.mahleArosRectifMH import case_mahle_aros_rectif_mh
 from functions.MahleMH.mahleArosTH import case_mahle_aros_th
 from functions.MahleMH.mahleOrings import case_mahle_oring
+from functions.MahleMH.mahleJuntaMH import case_mahle_juntas
+from functions.MahleMH.mahleTapaMH import case_mahle_tapas
 #mahle CL
 from functions.MahleCL.mahleConjuntosCL import case_mahle_conjuntos_cl
 from functions.MahleCL.mahleSubconjuntosCL import case_mahle_subconjuntos_cl
@@ -33,7 +36,7 @@ from functions.MahleCL.mahleCojinetesCL import case_mahle_cojinetes_cl
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
+from constants.empresas import MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,MAHLE_COJINETES_PC, MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -42,7 +45,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA]
+        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_COJINETES_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -93,6 +96,8 @@ class SelectorApp:
             case_mahle_subconjuntos_pc(archivo_excel, messagebox)    
         elif self.opcion_seleccionada.get() == MAHLE_AROS_PC:
             case_mahle_aros_pc(archivo_excel, messagebox)
+        elif self.opcion_seleccionada.get() == MAHLE_COJINETES_PC:
+            case_mahle_cojinetes_pc(archivo_excel, messagebox)
         
         #MAHLE MH
         elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS_MH:
@@ -111,6 +116,10 @@ class SelectorApp:
             case_mahle_aros_th(archivo_excel, messagebox)    
         elif self.opcion_seleccionada.get() == MAHLE_ORING:
             case_mahle_oring(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_TAPAS_MH:
+            case_mahle_tapas(archivo_excel, messagebox)    
+        elif self.opcion_seleccionada.get() == MAHLE_JUNTAS_MH:
+            case_mahle_juntas(archivo_excel, messagebox)    
         
         #MAHLE CL
         elif self.opcion_seleccionada.get() == MAHLE_CONJUNTOS_CL:
@@ -122,15 +131,14 @@ class SelectorApp:
         elif self.opcion_seleccionada.get() == MAHLE_COJINETES_CL:
             case_mahle_cojinetes_cl(archivo_excel, messagebox) 
         elif self.opcion_seleccionada.get() == MAHLE_AROS_CL:
-            case_mahle_aros_cl(archivo_excel, messagebox) 
-   
+            case_mahle_aros_cl(archivo_excel, messagebox)   
         self.root.destroy()
 
         if not archivo_excel:
             messagebox.warning("Warning", "Debes seleccionar un archivo Excel")
             return
 
-        # Check if the selected file is an Excel file. !!!AVERIGUAR OTROS FORMATOS DE EXCEL!!!
+        #Es un archivo xlx ?
         if not (archivo_excel.endswith('.xlsx') or archivo_excel.endswith('.xls')):
             messagebox.showwarning("Warning", "El formato del archivo no es correcto. Por favor, selecciona un archivo Excel.")
             return

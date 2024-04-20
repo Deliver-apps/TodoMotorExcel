@@ -12,8 +12,8 @@ def case_mahle_cojinetes_mh(archivo_excel, messagebox):
         datos = []
         
         for _, row in df.iterrows():
-            if pd.isna(row["Precio"]) and row["Aplicación"] is not None:
-                datos.append({ 'Artículo': '', "Aplicación": row["Aplicación"], 'Precio': '' })
+            if pd.isna(row["Precio"]) and row["Artículo"] is not None:
+                datos.append({ 'Artículo': '', "Aplicación": row["Artículo"], 'Precio': '' })
             else:
                 medidas = str(row['Aplicación']).split(',')
         
