@@ -18,4 +18,4 @@ MAHLE_COJINETES_CL = 'Mahle Cojinetes CL'
 MAHLE_AROS_CL = 'Mahle Aros CL'
 MAHLE_TAPAS_MH = 'Mahle Tapas CL'
 MAHLE_JUNTAS_MH = 'Mahle Juntas CL'
-MAHLE_COJINETES_CL
+FEDERAL_SUBCONJUNTOS = 'Federal Subconjuntos'
