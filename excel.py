@@ -36,10 +36,15 @@ from functions.MahleCL.mahleCojinetesCL import case_mahle_cojinetes_cl
 #FEDERAL
 from functions.Federal.Subconjuntos import case_federal_subconjuntos
 
+#BUJE LEVA y OTROS
+from functions.BujeLeva.BujeLeva import case_buje_add
+from functions.BujeLeva.LevaIM import case_leva_im
+from functions.BujeLeva.Dece import case_dece
+
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import FEDERAL_SUBCONJUNTOS, MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,MAHLE_COJINETES_PC, MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
+from constants.empresas import DECE, LEVA_IM, BUJE_LEVA, FEDERAL_SUBCONJUNTOS, MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,MAHLE_COJINETES_PC, MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -48,7 +53,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_COJINETES_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, '----- FEDERAL -----', FEDERAL_SUBCONJUNTOS]
+        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_COJINETES_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, '-----FEDERAL-----', FEDERAL_SUBCONJUNTOS, '-----BUJE LEVAS DECE-----', BUJE_LEVA, LEVA_IM, DECE]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -140,6 +145,14 @@ class SelectorApp:
         elif self.opcion_seleccionada.get() == FEDERAL_SUBCONJUNTOS:
             case_federal_subconjuntos(archivo_excel, messagebox)  
 
+        #BUJE LEVA y DECE
+        elif self.opcion_seleccionada.get() == BUJE_LEVA:
+            case_buje_add(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == LEVA_IM:
+            case_leva_im(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == DECE:
+            case_dece(archivo_excel, messagebox)  
+        
         self.root.destroy()
 
         if not archivo_excel:
