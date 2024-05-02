@@ -9,13 +9,17 @@ def case_dece(archivo_excel, messagebox):
         datos = []
         
         for _, row in df.iterrows():
-            if pd.isna(row["Precios Netos"]) and row["CODIGO DECE"] is not None:
-                datos.append({'CODIGO DECE': row['CODIGO DECE'], "MOTOR ; Diametro Perno ": '','MEDIDAS': '', 'Precios Netos': '' })
+            precios_netos_column = next((col for col in row.index if col.strip() == "Precios Netos"), None)
+            codigo_dece_column = next((col for col in row.index if col.strip() == "CODIGO DECE"), None)
+            motor_diametro_perno_column = next((col for col in row.index if col.strip() == "MOTOR ; Diametro Perno "), None)
+            
+            if pd.isna(precios_netos_column) and codigo_dece_column is not None:
+                datos.append({'CODIGO DECE': codigo_dece_column, "MOTOR ; Diametro Perno ": '','MEDIDAS': '', 'Precios Netos': '' })
             else:
                 medidas = str(row['MEDIDAS']).split('/')
-          
+
                 for medida in medidas:
-                    datos.append({'CODIGO DECE': row['CODIGO DECE'], 'MOTOR ; Diametro Perno ': row['MOTOR ; Diametro Perno '], 'MEDIDAS': medida, 'Precios Netos': round(row['Precios Netos'], 2)})        
+                    datos.append({'CODIGO DECE': codigo_dece_column, 'MOTOR ; Diametro Perno ': motor_diametro_perno_column, 'MEDIDAS': medida, 'Precios Netos': round(precios_netos_column, 2)})        
         
         df_repetido = pd.DataFrame(datos)
 

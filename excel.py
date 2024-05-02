@@ -165,7 +165,6 @@ class SelectorApp:
             return
         
         messagebox.showinfo("Info", "El archivo Excel ha sido añadido a tu escritorio.")
-        
 
     def cancelar(self):
         # Acciones al presionar Cancelar

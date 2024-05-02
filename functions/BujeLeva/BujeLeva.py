@@ -12,7 +12,11 @@ def case_buje_add(archivo_excel, messagebox):
     medidas = ['STD', '03', '05']  # En este excel se pedia agregar esto.
     
     for _, row in df.iterrows():
-        if pd.isna(row["Codigo"]) or pd.isna(row["Precio"]):
+        descripcion_column = next((col for col in row.index if col.strip() == "Descripcion"), None)
+        codigo_column = next((col for col in row.index if col.strip() == "Codigo"), None)
+        precio_column = next((col for col in row.index if col.strip() == "Precio"), None)
+
+        if pd.isna(codigo_column) or pd.isna(precio_column):
             datos.append({ 
                 'Codigo': '', 
                 "Descripcion": row["Descripcion"], 
@@ -23,7 +27,7 @@ def case_buje_add(archivo_excel, messagebox):
             for medida in medidas:
                 datos.append({ 
                     'Codigo': row["Codigo"], 
-                    "Descripcion": row["Descripcion"], 
+                    "Descripcion": descripcion_column, 
                     'Precio': round(row['Precio'], 2), 
                     'Medidas': medida 
                     })
