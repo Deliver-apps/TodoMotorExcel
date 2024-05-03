@@ -12,23 +12,25 @@ def case_buje_add(archivo_excel, messagebox):
     medidas = ['STD', '03', '05']  # En este excel se pedia agregar esto.
     
     for _, row in df.iterrows():
-        descripcion_column = next((col for col in row.index if col.strip() == "Descripcion"), None)
-        codigo_column = next((col for col in row.index if col.strip() == "Codigo - Modelo"), None)
-        precio_column = next((col for col in row.index if col.strip() == "Precio"), None)
+        # descripcion_column = next((col for col in row.index if col.strip() == "Descripcion"), None)
+        # codigo_column = next((col for col in row.index if col.strip() == "Codigo - Modelo"), None)
+        # precio_column = next((col for col in row.index if col.strip() == "Precio"), None)
 
-        if pd.isna(codigo_column) or pd.isna(precio_column):
+        if (pd.isna(row["Precio"]) or row["Precio"] == 0) and row["Descripcion"] is not None:
             datos.append({ 
                 'Codigo - Modelo': '', 
                 'Precio': '',
-                "Descripcion": row["Descripcion"],    
+                "Descripcion": row['Descripcion'],    
             })
         else:
             for medida in medidas:
+                medida = medida.strip()
+
                 datos.append({ 
                     'Codigo - Modelo': f"{row['Codigo']} {medida}", 
                     'Precio': round(row['Precio'], 2), 
-                    "Descripcion": descripcion_column, 
-                    })
+                    "Descripcion": row['Descripcion'], 
+                })
 
     df_repetido = pd.DataFrame(datos)
 
