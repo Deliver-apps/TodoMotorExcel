@@ -11,15 +11,18 @@ def case_mahle_oring(archivo_excel, messagebox):
     datos = []
 
     for _, row in df.iterrows():
-        if pd.isna(row["Precio"]) and row["Código MAHLE"] is not None:
-            datos.append({'Código MAHLE': '', "Aplicación (motor)": row["Código MAHLE"],'Conjunto equivalente': '', 'Precio': '' })
+        if (pd.isna(row["Precio"]) or row["Precio"] == 0) and row["Código MAHLE"] is not None:
+            datos.append({'Código MAHLE - Conjunto': '', "Aplicación (motor)": row["Código MAHLE"], 'Precio': '' })
         else:
             medidas = str(row['Conjunto equivalente']).split('/')
         
             for medida in medidas:
                 medida = medida.strip()
             
-                datos.append({'Código MAHLE': f"{row['Código MAHLE']}",'Aplicación (motor)': row['Aplicación (motor)'],'Conjunto equivalente': medida, 'Precio': round(row['Precio'], 2)})
+                datos.append({
+                    'Código MAHLE - Conjunto': f"{row['Código MAHLE']} {medida}",
+                    'Aplicación (motor)': row['Aplicación (motor)'], 'Precio': round(row['Precio'], 2)
+                })
 
     # Crear un nuevo DataFrame a partir de la lista de diccionarios
     df_repetido = pd.DataFrame(datos)

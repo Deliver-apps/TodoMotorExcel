@@ -14,18 +14,16 @@ def case_buje_add(archivo_excel, messagebox):
     for _, row in df.iterrows():
         if pd.isna(row["Codigo"]) or pd.isna(row["Precio"]):
             datos.append({ 
-                'Codigo': '', 
-                "Descripcion": row["Descripcion"], 
-                'Precio': '', 
-                'Medidas': '' 
+                'Codigo - Modelo': '', 
+                'Precio': '',
+                "Descripcion": row["Descripcion"],    
             })
         else:
             for medida in medidas:
                 datos.append({ 
-                    'Codigo': row["Codigo"], 
-                    "Descripcion": row["Descripcion"], 
+                    'Codigo - Modelo': f"{row['Codigo']} {medida}", 
                     'Precio': round(row['Precio'], 2), 
-                    'Medidas': medida 
+                    "Descripcion": row["Descripcion"], 
                     })
 
     df_repetido = pd.DataFrame(datos)

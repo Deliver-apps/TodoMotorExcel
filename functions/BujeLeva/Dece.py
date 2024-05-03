@@ -10,12 +10,12 @@ def case_dece(archivo_excel, messagebox):
         
         for _, row in df.iterrows():
             if pd.isna(row["Precios Netos"]) and row["CODIGO DECE"] is not None:
-                datos.append({'CODIGO DECE': row['CODIGO DECE'], "MOTOR ; Diametro Perno ": '','MEDIDAS': '', 'Precios Netos': '' })
+                datos.append({'CODIGO DECE - Medidas': row['CODIGO DECE'], "MOTOR ; Diametro Perno ": '', 'Precios Netos': '' })
             else:
                 medidas = str(row['MEDIDAS']).split('/')
           
                 for medida in medidas:
-                    datos.append({'CODIGO DECE': row['CODIGO DECE'], 'MOTOR ; Diametro Perno ': row['MOTOR ; Diametro Perno '], 'MEDIDAS': medida, 'Precios Netos': round(row['Precios Netos'], 2)})        
+                    datos.append({'CODIGO DECE - Medidas': f"{row['CODIGO DECE']} {medida}", 'MOTOR ; Diametro Perno ': row['MOTOR ; Diametro Perno '], 'Precios Netos': round(row['Precios Netos'], 2)})        
         
         df_repetido = pd.DataFrame(datos)
 

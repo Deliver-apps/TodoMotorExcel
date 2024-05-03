@@ -24,10 +24,10 @@ def ref_mahle_cl(ref):
         'E.O.': ['Nº. de equipo original.'],
         'AC': ['Altura de Compresión reducida'],
         'WS': ['con aros de vedación (with seal)'],
-        '1': ['Camisas con pestaña.'],
-        '2': ['Se proveen sin bujes de bielas y sin  anillos de camisas.'],
-        '3': ['Se proveen sin bujes de bielas y con anillos de camisas.'],
-        '4': ['Se proveen con bujes de biela.'],
+        1: ['Camisas con pestaña.'],
+        2: ['Se proveen sin bujes de bielas y sin  anillos de camisas.'],
+        3: ['Se proveen sin bujes de bielas y con anillos de camisas.'],
+        4: ['Se proveen con bujes de biela.'],
         'A.C': ['Altura de compresión.'],
     }
 

@@ -9,13 +9,12 @@ def get_required_columns(opcion):
         
         #MAHLE PC
         MAHLE_SUBCONJUNTOS_PC: ['CODIGO ANTIGUO', 'APLICACION', 'MEDIDAS', 'Precio'],
-        MAHLE_AROS_PC: ['APLICACION', 'MEDIDAS', 'RECTIF.', 'RECAMBIO', 'Precio'],
+        MAHLE_AROS_PC: ['APLICACION', 'MEDIDAS', 'Precio'],
         MAHLE_COJINETES_PC: ['Marca', 'Código Corto', 'Aplicación', 'Precio'],
-        
         #MAHLE MH
         MAHLE_CONJUNTOS_MH: ['Artículo', 'Ref.', 'Precio', 'Aplicación'],
         MAHLE_SUBCONJUNTOS_MH: ['Artículo', 'Ref.', 'Precio', 'Aplicación'],
-        MAHLE_CAMISA_MH: ['MAHLE', 'Medidas', 'Precio', 'Aplicación'],
+        MAHLE_CAMISA_MH: ['MAHLE', 'Medidas', 'PC', 'Precio', 'Aplicación'],
         MAHLE_COJINETES_MH: ['Artículo', 'Ref.', 'Precio', 'Aplicación'],
         MAHLE_AROS_MH: ['Artículo', 'Ref.', 'Precio', 'Aplicación'],
         MAHLE_AROS_RECTIF_MH: ['Artículo', 'Ref.', 'Precio', 'Aplicación'],

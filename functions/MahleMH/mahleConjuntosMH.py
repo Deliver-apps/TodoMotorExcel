@@ -17,7 +17,7 @@ def case_mahle_conjuntos_mh(archivo_excel, messagebox):
                 
                 for medida in medidas:
                     # Añadir un diccionario por cada combinación de código y medida
-                    datos.append({'Artículo - Ref': f"{row['Artículo']} / {row['Ref.']} / {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
+                    datos.append({'Artículo - Ref': f"{row['Artículo']} {row['Ref.']} {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
         
         df_repetido = pd.DataFrame(datos)
 

@@ -13,8 +13,9 @@ def case_leva_im(archivo_excel, messagebox):
     df = leer_archivo_excel(archivo_excel, columnas, messagebox) 
     datos = []
     
+    # En este excel se pedia agregar esto.
     medidas_mm = ['STD', '0.05 mm', '0.13 mm', '0.25 mm', '0.50 mm', '0.75 mm', '1.00 mm']
-    medidas_inch = ['STD', '002"', '005"', '010"', '015"', '020"', '030"']  # En este excel se pedia agregar esto.
+    medidas_inch = ['STD', '002"', '005"', '010"', '015"', '020"', '030"']  
     
     for _, row in df.iterrows():
         cod_im = str(row['Cod. IM']) if not pd.isna(row['Cod. IM']) else ''
@@ -27,10 +28,9 @@ def case_leva_im(archivo_excel, messagebox):
 
         for medida in medidas:
             datos.append({
-                'Cod. IM': cod_im,
+                'Cod. IM - Medida': f"{cod_im} {medida}",
                 "Descripción": row["Descripción"],
                 'Precio': round(row['Precio'], 2),
-                'Medidas': medida
             })
 
     df_repetido = pd.DataFrame(datos)

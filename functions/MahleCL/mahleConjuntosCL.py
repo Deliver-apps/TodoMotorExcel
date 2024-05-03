@@ -11,13 +11,13 @@ def case_mahle_conjuntos_cl(archivo_excel, messagebox):
         
         for _, row in df.iterrows():
             if pd.isna(row["Precio"]) and row["Artículo"] is not None:
-                datos.append({'Artículo - Ref': '', "Aplicación": row["Artículo"], 'Precio': '' })
+                datos.append({'Artículo - Ref - Medidas': '', "Aplicación": row["Artículo"], 'Precio': '' })
             else:
                 medidas = ref_mahle_cl(row["Ref."])
                 
                 for medida in medidas:
                     # Añadir un diccionario por cada combinación de código y medida
-                    datos.append({'Artículo - Ref': f"{row['Artículo']} / {row['Ref.']} / {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
+                    datos.append({'Artículo - Ref - Medidas': f"{row['Artículo']} {row['Ref.']} {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
         
         df_repetido = pd.DataFrame(datos)
 

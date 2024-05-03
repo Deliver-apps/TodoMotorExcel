@@ -13,12 +13,12 @@ def case_mahle_aros_mh(archivo_excel, messagebox):
         
         for _, row in df.iterrows():
             if (pd.isna(row["Precio"]) or row["Precio"] == 0) and row["Artículo"] is not None:
-                datos.append({'Artículo - Ref': '', "Aplicación": row["Artículo"], 'Precio': '' })
+                datos.append({'Artículo - Ref - Medida': '', "Aplicación": row["Artículo"], 'Precio': '' })
             else:
                 medidas = ref_mahle_aros(row["Ref."])
                 
                 for medida in medidas:
-                    datos.append({'Artículo - Ref': f"{row['Artículo']} / {row['Ref.']} / {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
+                    datos.append({'Artículo - Ref - Medida': f"{row['Artículo']} {row['Ref.']} {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        
         
         df_repetido = pd.DataFrame(datos)
 
