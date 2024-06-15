@@ -14,7 +14,7 @@ def case_mahle_conjuntos_cl(archivo_excel, messagebox):
                 datos.append({'Artículo - Ref - Medidas': '', "Aplicación": row["Artículo"], 'Precio': '' })
             else:
                 medidas = ref_mahle_cl(row["Ref."])
-                
+
                 for medida in medidas:
                     # Añadir un diccionario por cada combinación de código y medida
                     datos.append({'Artículo - Ref - Medidas': f"{row['Artículo']} {row['Ref.']} {medida}", 'Aplicación': row['Aplicación'], 'Precio': round(row['Precio'], 2)})        

@@ -20,6 +20,9 @@ from utils.requiredColumns import get_required_columns
 def case_mahle_aros_pc(archivo_excel, messagebox):
     columnas = get_required_columns(MAHLE_AROS_PC)
     df = leer_archivo_excel(archivo_excel, columnas, messagebox)
+
+    messagebox.showinfo("Tutorial", "Para el correcto funcionamiento de este archivo debes copiar solo los valores de la tabla y pegarlos en una hoja nueva en A2. Recuerda de escribir los nombres de las columnas segun su debido valor. Deberia quedar asi A1 = APLICACION, C1 = MEDIDAS, E1 = RECTIF, G1 = PRECIO RECTIF, H1 = RECAMBIO, J1 = PRECIO RECAMBIO . Con sus respectiva data abajo de cada columna")
+
     datos = []
     
     for _, row in df.iterrows():

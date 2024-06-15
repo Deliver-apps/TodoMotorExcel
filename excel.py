@@ -35,6 +35,10 @@ from functions.MahleCL.mahleArosCL import case_mahle_aros_cl
 from functions.MahleCL.mahleCojinetesCL import case_mahle_cojinetes_cl
 #FEDERAL
 from functions.Federal.Subconjuntos import case_federal_subconjuntos
+from functions.Federal.Cojinetes import case_federal_cojinetes
+from functions.Federal.Pistones import case_federal_pistones
+from functions.Federal.Buje import case_federal_buje
+from functions.Federal.Aros import case_federal_aros
 
 #BUJE LEVA y OTROS
 from functions.BujeLeva.BujeLeva import case_buje_add
@@ -44,7 +48,7 @@ from functions.BujeLeva.Dece import case_dece
 
 #utils
 from utils.excelHandler import leer_archivo_excel, guardar_df_en_excel
-from constants.empresas import DECE, LEVA_IM, BUJE_LEVA, FEDERAL_SUBCONJUNTOS, MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,MAHLE_COJINETES_PC, MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
+from constants.empresas import FEDERAL_AROS, FEDERAL_PISTONES, FEDERAL_BUJE, FEDERAL_COJINETES ,DECE, LEVA_IM, BUJE_LEVA, FEDERAL_SUBCONJUNTOS, MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,MAHLE_COJINETES_PC, MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL, MAHLE_CONJUNTOS_CL, MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH, MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA
 from utils.requiredColumns import get_required_columns
 
 class SelectorApp:
@@ -53,7 +57,7 @@ class SelectorApp:
         root.title('Selector de Archivos y Opciones')
 
         # Opciones para el Combobox o OptionMenu
-        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_COJINETES_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, '-----FEDERAL-----', FEDERAL_SUBCONJUNTOS, '-----BUJE LEVAS DECE-----', BUJE_LEVA, LEVA_IM, DECE]
+        self.opciones = ['-----MAHLE CL-----', MAHLE_COJINETES_CL, MAHLE_AROS_CL, MAHLE_CAMISA_CL, MAHLE_SUBCONJUNTOS_CL,MAHLE_CONJUNTOS_CL,'-----MAHLE MH-----', MAHLE_ORING, MAHLE_AROS_TH, MAHLE_AROS_RECTIF_MH, MAHLE_AROS_MH, MAHLE_CONJUNTOS_MH, MAHLE_CAMISA_MH, MAHLE_COJINETES_MH, MAHLE_SUBCONJUNTOS_MH,MAHLE_TAPAS_MH, MAHLE_JUNTAS_MH,'-----MAHLE PC-----', MAHLE_AROS_PC, MAHLE_SUBCONJUNTOS_PC, MAHLE_COJINETES_PC,'-----NUBO-----', NUBO_GUIA_VALVULA, NUBO_ASIENTO_VALVULA, '-----FEDERAL-----', FEDERAL_COJINETES, FEDERAL_BUJE, FEDERAL_SUBCONJUNTOS, FEDERAL_PISTONES, FEDERAL_AROS, '-----BUJE LEVAS DECE-----', BUJE_LEVA, LEVA_IM, DECE]
         
         # Variable para almacenar la opción seleccionada
         self.opcion_seleccionada = tk.StringVar()
@@ -144,6 +148,14 @@ class SelectorApp:
         #FEDERAL
         elif self.opcion_seleccionada.get() == FEDERAL_SUBCONJUNTOS:
             case_federal_subconjuntos(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == FEDERAL_COJINETES:
+            case_federal_cojinetes(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == FEDERAL_BUJE:
+            case_federal_buje(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == FEDERAL_PISTONES:
+            case_federal_pistones(archivo_excel, messagebox)  
+        elif self.opcion_seleccionada.get() == FEDERAL_AROS:
+            case_federal_aros(archivo_excel, messagebox)  
 
         #BUJE LEVA y DECE
         elif self.opcion_seleccionada.get() == BUJE_LEVA:
